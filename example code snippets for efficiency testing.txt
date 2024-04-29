@@ -1,0 +1,56 @@
+Below are code snippets to help you add the variables to your code to test for efficiency.
+
+For the two iterative methods, use a local variable inside the method. Initialize that variable
+to 0. Then, inside the loop, increment with each pass of the loop. At the end of the method, 
+before the return, print the variable.
+
+For the recursive methods, declare a static variable *outside* of the method and initialize to 0.
+Reassign the variable to 0 at the start of the recursive method. Inside the helper method, increment
+the variable. At the end of the recursive method (not the helper), before you return, print the
+variable. (Note that you will need to assign your helper method call to a local variable instead of 
+just returning in order to first print the efficiency variable.)
+
+
+// EXAMPLE OF ITERATIVE EFFICIENCY VARIABLE FOR ITERATIVE COUNT METHOD
+public int countIteratve(T target) {
+   int loopTimes=0; // declare this variable for the efficiency tests
+
+   while(...) { // you will have some loop in your method
+	loopTimes++; // increment your variable here
+        ... your code here
+   }
+
+   System.out.println(loopTimes); // print out your variable before you return
+   return ...;
+}
+
+// EXAMPLE OF RECURSIVE EFFICIENCY VARIABLE FOR COUNT GREATER THAN
+
+private static int recursionTimes = 0; // declare this variable for the efficiency tests for recursion
+
+public int countGreaterRecursive(T target) {
+   recursionTimes = 0; // initialize the variable to 0 inside the method
+   int answer = countGreaterRecursiveHelper(...); // call to your helper method
+   System.out.println(recursionTimes); // print out your variable before you return
+   return answer;
+}
+private int countGreaterRecursiveHelper(...) {
+   recursionTimes++; // increment your variable here
+   ... your code here
+   return ...;
+}
+
+// EXAMPLE OF ITERATIVE EFFICIENCY VARIABLE FOR COUNT GREATER THAN
+public int countGreaterIterative(T target) {
+   int loopTimes=0; // declare this variable for the efficiency tests
+
+   while(...) { // you will have some loop in your method
+	loopTimes++; // increment your variable here 
+        ... your code here
+   }
+
+   System.out.println(loopTimes); // print out your variable before you return
+   return ...;
+}
+		
+	
