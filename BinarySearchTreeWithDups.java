@@ -22,8 +22,43 @@ public class BinarySearchTreeWithDups<T extends Comparable<? super T>> extends B
 	// IMPLEMENT THIS METHOD; THIS METHOD CANNOT BE RECURSIVE
 	private boolean addEntryHelperNonRecursive(T newEntry) {
 		// YOUR CODE HERE! 
-		
-		return false; // placeholder: replace with your own code
+    		BinaryNode<T> newNode = new BinaryNode<>(newEntry);
+    			if (root == null) {
+        			root = newNode; // If the tree is empty, set the new node as the root
+        			return true;
+    			}
+
+    		BinaryNode<T> currentNode = root;
+    		boolean found = false;
+
+    		while (!found) {
+        		T currentEntry = currentNode.getData();
+        		int comparison = newEntry.compareTo(currentEntry);
+
+        		if (comparison == 0) {
+            			if (currentNode.hasLeftChild()) {
+                			currentNode = currentNode.getLeftChild();
+            			} else {
+                			found = true;
+                			currentNode.setLeftChild(newNode);
+            			}
+        		} else if (comparison < 0) {
+            			if (currentNode.hasLeftChild()) {
+                			currentNode = currentNode.getLeftChild();
+            			} else {
+                			found = true;
+                			currentNode.setLeftChild(newNode);
+            			}
+        		} else {
+            			if (currentNode.hasRightChild()) {
+	                	currentNode = currentNode.getRightChild();
+            		} else {
+                		found = true;
+                		currentNode.setRightChild(newNode);
+            			}
+       			}
+    		}
+    		return true;
 	}
 
 	// THIS METHOD CANNOT BE RECURSIVE.
