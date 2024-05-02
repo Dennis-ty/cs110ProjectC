@@ -65,12 +65,12 @@ public class BinarySearchTreeWithDups<T extends Comparable<? super T>> extends B
 	// Make sure to take advantage of the sorted nature of the BST!
 	public int countIterative(T target) {
 		// YOUR CODE HERE!
-		Stack<BinaryNode<T>> nodeStack = new Stack<>();
-		nodeStack.push(currentNode);
 		
 		// this initial code is meant as a suggestion to get your started- use it or delete it!
 		int count = 0;
 		BinaryNode<T> currentNode = root;
+		Stack<BinaryNode<T>> nodeStack = new Stack<>();
+		nodeStack.push(currentNode);
 
 		// consider a loop!
 		while (!nodeStack.isEmpty()) {
@@ -100,12 +100,27 @@ public class BinarySearchTreeWithDups<T extends Comparable<? super T>> extends B
 		// YOUR CODE HERE! 
 			
 		// this initial code is meant as a suggestion to get your started- use it or delete it!
-		int count = 0;
-		BinaryNode<T> rootNode = root;
+		// int count = 0;
+		// BinaryNode<T> rootNode = root;
 				
 		// consider a helper method!
 			
-		return count;
+		return countGreaterRecursiveHelper(target, root);
+	}
+
+	private int countGreaterRecursiveHelper(T target, BinaryNode<T> node) {
+		if (null == node) {
+			return 0;
+		}
+		if (target.compareTo(node.getData()) > 0) {
+			return countGreaterRecursiveHelper(target, node.getRightChild());
+		} else if (target.compareTo(node.getData()) < 0) {
+			return 1 + countGreaterRecursiveHelper(target, node.getLeftChild())
+					+ countGreaterRecursiveHelper(target, node.getRightChild());
+		} else {
+			return countGreaterRecursiveHelper(target, node.getLeftChild())
+					+ countGreaterRecursiveHelper(target, node.getRightChild());
+		}
 	}
 
 	// THIS METHOD CANNOT BE RECURSIVE.
@@ -116,11 +131,29 @@ public class BinarySearchTreeWithDups<T extends Comparable<? super T>> extends B
 		
 		// this initial code is meant as a suggestion to get your started- use it or delete it!
 		int count = 0;
-		BinaryNode<T> rootNode = root;
+		BinaryNode<T> currentNode = root;
 		Stack<BinaryNode<T>> nodeStack = new Stack<BinaryNode<T>>();
-		nodeStack.push(rootNode);
+		// nodeStack.push(rootNode);
 
 		// consider a loop based on the stack!
+		while (!nodeStack.isEmpty() || null != currentNode) {
+			// find rightmost node with no right child
+			while (null != currentNode) {
+				nodeStack.push(currentNode);
+				currentNode = currentNode.getRightChild();
+			}
+			if (!nodeStack.isEmpty()) {
+				BinaryNode<T> nextNode = nodeStack.pop();
+				if (target.compareTo(nextNode.getData()) > 0) {
+					// For BST, all the rest nodes should be less that target, no need to continue
+					return count;
+				}
+				if (target.compareTo(nextNode.getData()) < 0) {
+					count++;
+				}
+				currentNode = nextNode.getLeftChild();
+			}
+		}
 		
 		return count;
 	}
