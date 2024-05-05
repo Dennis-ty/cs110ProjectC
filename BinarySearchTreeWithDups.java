@@ -165,7 +165,17 @@ public class BinarySearchTreeWithDups<T extends Comparable<? super T>> extends B
 	// If you make the method recursive, you might need to comment out the call to the method in Part B.
 	public int countUniqueValues() {
 		// YOUR EXTRA CREDIT CODE HERE! 
-		return 0; // placeholder: replace with your own code
+		Set<T> uniqueValues = new HashSet<>();
+		countUniqueValuesHelper(root, uniqueValues);
+		return uniqueValues.size();
 	}
-
+	
+	private void countUniqueValuesHelper(BinaryNode<T> node, Set<T> uniqueValues) {
+		if (null == node) {
+			return;
+		}
+		uniqueValues.add(node.getData());
+		countUniqueValuesHelper(node.getLeftChild(), uniqueValues);
+		countUniqueValuesHelper(node.getRightChild(), uniqueValues);
+	}
 }
