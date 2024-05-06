@@ -1,3 +1,18 @@
+Question part:
+1. Compare the trees in Test A and Test B:
+        In Test A, an ascending sorted list was built faster, 814 ms, than the tree from Test B, a descending sorted list, 5159 ms. 
+        They are kind of a highly skewed tree which is most nodes on the left or right, like a list. For the total time, Test B, 13s, is better than Test A, 29s, potentially due to the specifics of the operations and the order in which data was accessed, which may have coincidentally aligned better with the tree's skewed structure.
+
+2. Comparison between Test A and Test C Trees:
+        In Test C Trees, a shuffled list was built significantly faster, 26 ms, compared to the tree from Test A, 814 ms. "Tree info" suggests that the tree from Test C was more balanced (left height: 45, right height: 159) than the one from Test A (left height: 3, right height: 4787), which likely contributed to the faster build time due to more efficient node placement during build tree.
+
+3. Comparison between Test C Tree and Shuffled List:
+        Processing using the tree in Test C was faster, 15 ms, compared to using the list,135 ms. The tree offers faster average access times due to structured traversals and potentially balanced nature, as compared to a linear search in an unsorted list. The big-o notation likely reflects O(log⁡n) for tree operations versus O(n) for list operations.
+
+4. What is the main characteristic of a binary search tree that affects its efficiency?
+        Through Test A, Test B, and Test C tree parts, The efficiency of a binary search tree is most affected by its balance. A well-balanced tree allows operations like search, insertion, and deletion to be performed in O(log⁡n)time, whereas an unbalanced tree may degenerate to O(n)in the worst case, similar to a linked list.
+
+Part B test data is below:
 ------------------------------TEST A: TREE BUILT FROM A SORTED LIST, ASCENDING------------------------------
         ...building tree with entry 10000
         ...building tree with entry 20000
