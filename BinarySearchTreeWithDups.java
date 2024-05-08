@@ -65,29 +65,16 @@ public class BinarySearchTreeWithDups<T extends Comparable<? super T>> extends B
 	// Make sure to take advantage of the sorted nature of the BST!
 	public int countIterative(T target) {
 		// YOUR CODE HERE!
-		
-		// this initial code is meant as a suggestion to get your started- use it or delete it!
 		int count = 0;
 		BinaryNode<T> currentNode = root;
-		Stack<BinaryNode<T>> nodeStack = new Stack<>();
-		nodeStack.push(currentNode);
-
-		// consider a loop!
-		while (!nodeStack.isEmpty()) {
-			currentNode = nodeStack.pop();
-			if (currentNode != null) {
-				T currentData = currentNode.getData();
-				if (currentData.equals(target)) {
+		while(null != currentNode) {
+			if(target.compareTo(currentNode.getData()) > 0) {
+				currentNode = currentNode.getRightChild();
+			} else {
+				if(target.compareTo(currentNode.getData()) == 0) {
 					count++;
 				}
-
-				if (currentNode.getRightChild() != null) {
-					nodeStack.push(currentNode.getRightChild());
-				}
-
-				if (currentNode.getLeftChild()!= null) {
-					nodeStack.push(currentNode.getLeftChild());
-				}
+				currentNode = currentNode.getLeftChild();
 			}
 		}
 		return count;
